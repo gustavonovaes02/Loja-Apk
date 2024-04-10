@@ -15,14 +15,20 @@
     <label for="nome">Nome:</label>
     <input type="text" id="nome" name="nome" required>
     
-    <label for="endereco">Endereço:</label>
-    <input type="text" id="endereco" name="endereco" required>
-    
     <label for="plano">Plano:</label>
     <select id="plano" name="plano">
       <option value="iptv">IPTV</option>
       <option value="p2p">P2P</option>
     </select>
+    
+    <label for="valor">Valor:</label>
+    <input type="number" id="valor" name="valor" required>
+    
+    <label for="dataAtivacao">Data de Ativação:</label>
+    <input type="date" id="dataAtivacao" name="dataAtivacao" required>
+    
+    <label for="dataVencimento">Data de Vencimento:</label>
+    <input type="date" id="dataVencimento" name="dataVencimento" required>
     
     <button type="submit">Adicionar Cliente</button>
   </form>
@@ -35,8 +41,10 @@
     <thead>
       <tr>
         <th>Nome</th>
-        <th>Endereço</th>
         <th>Plano</th>
+        <th>Valor</th>
+        <th>Data de Ativação</th>
+        <th>Data de Vencimento</th>
       </tr>
     </thead>
     <tbody>
@@ -51,18 +59,24 @@ document.getElementById('formNovoCliente').addEventListener('submit', function(e
   e.preventDefault();
   
   var nome = document.getElementById('nome').value;
-  var endereco = document.getElementById('endereco').value;
   var plano = document.getElementById('plano').value;
+  var valor = document.getElementById('valor').value;
+  var dataAtivacao = document.getElementById('dataAtivacao').value;
+  var dataVencimento = document.getElementById('dataVencimento').value;
   
   var tabela = document.getElementById('listaClientes').getElementsByTagName('tbody')[0];
   var novaLinha = tabela.insertRow();
   var celulaNome = novaLinha.insertCell(0);
-  var celulaEndereco = novaLinha.insertCell(1);
-  var celulaPlano = novaLinha.insertCell(2);
+  var celulaPlano = novaLinha.insertCell(1);
+  var celulaValor = novaLinha.insertCell(2);
+  var celulaDataAtivacao = novaLinha.insertCell(3);
+  var celulaDataVencimento = novaLinha.insertCell(4);
   
   celulaNome.textContent = nome;
-  celulaEndereco.textContent = endereco;
   celulaPlano.textContent = plano;
+  celulaValor.textContent = valor;
+  celulaDataAtivacao.textContent = dataAtivacao;
+  celulaDataVencimento.textContent = dataVencimento;
   
   // Limpar o formulário
   document.getElementById('formNovoCliente').reset();
