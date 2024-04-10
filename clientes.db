@@ -1,0 +1,33 @@
+import sqlite3
+
+# Conectar ao banco de dados (ou criar se não existir)
+conn = sqlite3.connect('clientes.db')
+
+# Criar um cursor
+cursor = conn.cursor()
+
+# Criar a tabela de clientes
+cursor.execute('''
+CREATE TABLE IF NOT EXISTS clientes (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome TEXT NOT NULL,
+    plano TEXT NOT NULL,
+    valor REAL NOT NULL,
+    data_ativacao TEXT NOT NULL,
+    data_vencimento TEXT NOT NULL
+)
+''')
+
+# Função para adicionar um novo cliente ao banco de dados
+def adicionar_cliente(nome, plano, valor, data_ativacao, data_vencimento):
+    cursor.execute('''
+    INSERT INTO clientes (nome, plano, valor, data_ativacao, data_vencimento)
+    VALUES (?, ?, ?, ?, ?)
+    ''', (nome, plano, valor, data_ativacao, data_vencimento))
+    conn.commit()
+
+# Exemplo de uso
+adicionar_cliente('João Silva', 'IPTV', 99.90, '2024-04-10', '2024-05-10')
+
+# Fechar a conexão
+conn.close()
